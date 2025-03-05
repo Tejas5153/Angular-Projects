@@ -1,0 +1,43 @@
+<div>
+    <h1>Using DatePipe</h1>
+    <p>The current date is: {{ currentDate | date: 'fullDate' }}</p>
+    <p>Formatted date: {{ currentDate | date: 'shortDate' }}</p>
+</div>
+
+
+<div>
+    <h1>Using CurrencyPipe</h1>
+    <p>Price in USD: {{ price | currency:'USD':true:'1.2-2' }}</p>
+</div>
+
+
+<div>
+    <h1>Using UpperCasePipe and LowerCasePipe</h1>
+    <p>Original: {{ message }}</p>
+    <p>Uppercase: {{ message | uppercase }}</p>
+    <p>Lowercase: {{ message | lowercase }}</p>
+</div>
+
+<div>
+    <h1>Using Custom TitleCasePipe</h1>
+    <p>Original Text: {{ text }}</p>
+    <p>Title Case: {{ text | titleCase }}</p>
+</div>
+
+
+<div>
+    <h1>Chaining Pipes</h1>
+
+    <!-- Chaining UpperCasePipe and TitleCasePipe -->
+    <p>Chained Pipe Result: {{ message | lowercase | titleCase }}</p>
+
+    <!-- Chaining CurrencyPipe and DecimalPipe -->
+    <p>Chained Currency Pipe: {{ price | currency:'USD':true:'1.0-2' | uppercase }}</p>
+</div>
+
+<div>
+    <h1>Chaining Built-in and Custom Pipes</h1>
+
+    <!-- Chaining UpperCasePipe and Custom TitleCasePipe -->
+    <p>Chained Pipe Result: {{ message | uppercase | titleCase }}</p>
+</div>

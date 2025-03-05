@@ -1,0 +1,134 @@
+<div>
+    <h1>{{ title1 }}</h1>
+    <p>{{ description }}</p>
+</div>
+
+
+<div>
+    <h1>{{ title2 }}</h1>
+    <button (click)="handleClick()">Click Me</button>
+</div>
+
+
+<div>
+    <h1>Two-Way Data Binding Example</h1>
+    <input [(ngModel)]="name" placeholder="Enter your name">
+    <p>Your name is: {{ name }}</p>
+</div>
+
+
+<div>
+    <h1>Property Binding Example</h1>
+    <button [disabled]="isDisabled">{{ buttonText }}</button>
+</div>
+
+
+<app-parent></app-parent>
+
+
+<h1>ngFor and ngIf Example</h1>
+
+<!-- Test ngFor -->
+<h2>List of Items:</h2>
+<ul>
+    <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+
+<!-- Test ngIf -->
+<h2>Login Status:</h2>
+<p *ngIf="isLoggedIn === true">✅ You are logged in!</p>
+<p *ngIf="isLoggedIn === false">❌ Please log in to continue.</p>
+
+
+
+
+<div>
+    <h1>Reactive Form with Validation</h1>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <!-- Username Field -->
+        <div>
+            <label for="username">Username:</label>
+            <input id="username" formControlName="username">
+            <div *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
+                <small *ngIf="registrationForm.controls['username'].errors?.['required']">Username is required</small>
+                <small *ngIf="registrationForm.controls['username'].errors?.['minlength']">Username must be at least 3 characters</small>
+            </div>
+        </div>
+
+        <!-- Email Field -->
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email">
+            <div *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched">
+                <small *ngIf="registrationForm.controls['email'].errors?.['required']">Email is required</small>
+                <small *ngIf="registrationForm.controls['email'].errors?.['email']">Please enter a valid email</small>
+            </div>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" formControlName="password">
+            <div *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+                <small *ngIf="registrationForm.controls['password'].errors?.['required']">Password is required</small>
+                <small *ngIf="registrationForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters</small>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="registrationForm.invalid">Submit</button>
+    </form>
+</div>
+
+
+
+
+<div>
+    <h1>Toggle Visibility and Apply Classes Dynamically</h1>
+
+    <!-- Buttons to toggle visibility and special styling -->
+    <button (click)="toggleVisibility()">Toggle Visibility</button>
+    <button (click)="toggleSpecial()">Toggle Special Class</button>
+
+    <!-- Content visibility controlled by *ngIf -->
+    <div *ngIf="isVisible">
+        <p [ngClass]="{ 'special-text': isSpecial }">This text can have a special class applied!</p>
+    </div>
+</div>
+
+
+
+
+
+<div>
+    <h1>Pagination Example</h1>
+
+    <!-- Display paginated items -->
+    <ul>
+        <li *ngFor="let item of paginatedData">{{ item }}</li>
+    </ul>
+
+    <!-- Pagination controls -->
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= data.length">Next</button>
+
+    <!-- Page info -->
+    <p>Page {{ currentPage }} of {{ totalPages }}</p>
+
+</div>
+
+
+
+
+
+<div>
+    <h1>Custom Modal Dialog</h1>
+    <button (click)="openModal()">Open Modal</button>
+
+    <!-- Debugging: Show Modal State -->
+    <p>Modal State: {{ showModal }}</p>
+    <!-- ✅ Shows true/false -->
+
+    <app-modal [showModal]="showModal" (close)="closeModal()"></app-modal>
+</div>
