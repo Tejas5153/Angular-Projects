@@ -1,0 +1,24 @@
+<div>
+    <h1>Angular Structural Directives</h1>
+    <!-- *ngIf to conditionally show/hide the paragraph -->
+    <p *ngIf="isVisible">This content is visible when 'isVisible' is true.</p>
+    <button (click)="toggleVisibility()">Toggle Visibility</button>
+
+    <h2>List of Items:</h2>
+    <!-- *ngFor to display the items -->
+    <ul>
+        <li *ngFor="let item of items">{{ item }}</li>
+    </ul>
+</div>
+
+<div>
+    <h1>Custom Directive Example</h1>
+    <p appHighlight>Hover over this text to highlight it.</p>
+</div>
+
+
+<div>
+    <h1>Using Angular Built-in DatePipe</h1>
+    <p>Original Date: {{ currentDate }}</p>
+    <p>Formatted Date: {{ currentDate | date:'fullDate' }}</p>
+</div>
