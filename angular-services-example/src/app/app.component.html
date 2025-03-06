@@ -1,0 +1,13 @@
+<h1>User List</h1>
+<ul>
+    <li *ngFor="let user of users">
+        {{ user.id }} - {{ user.name }} ({{ user.email }})
+    </li>
+</ul>
+
+
+
+<!-- src/app/app.component.html -->
+<h1>Welcome to Angular User List</h1>
+<app-user-list></app-user-list>
+<!-- ✅ Using the newly created component -->
