@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { UserService } from './user.service';
 import { CommonModule } from '@angular/common';
 import { UserListComponent } from "./user-list/user-list.component";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
+  standalone: true, 
   imports: [RouterOutlet, CommonModule, UserListComponent],  
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'] 
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   users: any[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private http: HttpClient) {} 
 
   ngOnInit() {
     this.userService.getUsers().subscribe((data) => {
