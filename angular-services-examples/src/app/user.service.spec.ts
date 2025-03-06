@@ -9,10 +9,7 @@ describe('UserService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        UserService,
-        provideHttpClientTesting() // ✅ Correct way to provide HttpClient
-      ]
+      providers: [UserService, provideHttpClientTesting()] // ✅ Correct way to provide HttpClient
     });
 
     service = TestBed.inject(UserService);

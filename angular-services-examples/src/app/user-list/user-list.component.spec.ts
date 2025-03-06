@@ -1,23 +1,40 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+// src/app/user.service.spec.ts
+import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { UserService } from '../user.service';
 import { UserListComponent } from './user-list.component';
 
-describe('UserListComponent', () => {
-  let component: UserListComponent;
-  let fixture: ComponentFixture<UserListComponent>;
+describe('UserService', () => {
+  let service: UserService;
+  let httpMock: HttpTestingController;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [UserListComponent]
-    })
-    .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [UserListComponent],
+      providers: [UserService, provideHttpClientTesting()] // ✅ Correct way to provide HttpClient
+    });
 
-    fixture = TestBed.createComponent(UserListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    service = TestBed.inject(UserService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should fetch users successfully', () => {
+    const mockUsers = [
+      { id: 1, name: 'John Doe' },
+      { id: 2, name: 'Jane Doe' },
+    ];
+
+    service.getUsers().subscribe((users) => {
+      expect(users.length).toBe(2);
+      expect(users).toEqual(mockUsers);
+    });
+
+    const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockUsers);
+  });
+
+  afterEach(() => {
+    httpMock.verify(); // ✅ Ensure no pending HTTP requests
   });
 });
